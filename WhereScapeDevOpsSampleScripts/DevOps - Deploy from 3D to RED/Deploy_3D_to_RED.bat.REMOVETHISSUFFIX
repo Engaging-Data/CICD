@@ -1,0 +1,81 @@
+@ECHO OFF
+REM ---------------------------------------------------------------------------
+REM -
+REM - Name:    Sample 3D to RED Deployment
+REM -
+REM ---------------------------------------------------------------------------
+REM - CHANGE HISTORY:
+REM - Date     Initials Notes
+REM - -------- -------- -------------------------------------------------------
+REM - 20210510 PC       Initial version
+REM ---------------------------------------------------------------------------
+REM - Set variables values
+REM - Set working directory
+REM ---------------------------------------------------------------------------
+SET WRK_DIR="C:\WhereScape\Applications"
+SET INS_DIR="C:\Program Files\WhereScape\WhereScape 3D"
+SET EXE_DIR="C:\Program Files\WhereScape\RED"
+
+REM ---------------------------------------------------------------------------
+REM - 3D
+REM ---------------------------------------------------------------------------
+SET REPO_3D="wsDVDemo"
+SET CATG_3D="RED Export"
+SET MOD_NAM="Raw Vault - Single Source"
+SET MOD_VER="Master"
+
+REM ---------------------------------------------------------------------------
+REM - RED Command Line
+REM ---------------------------------------------------------------------------
+SET RED_MET="wsDVDemo"
+SET RED_ARC=64
+SET RED_USR=Demo
+
+REM ---------------------------------------------------------------------------
+REM - Derived variable values
+REM ---------------------------------------------------------------------------
+SET FIL_NAM=%MOD_NAM: =_%_%MOD_VER: =_%
+SET JAVA_EX="%INS_DIR:"=%\jre\bin\java.exe"
+SET JAR_FIL="%INS_DIR:"=%\WhereScape-3D-HEAD-bundle.jar"
+SET RED_CLI="%EXE_DIR:"=%\redcli.exe"
+SET XML_FIL="%WRK_DIR:"=%\%FIL_NAM:"=%.xml"
+SET DDL_FIL="%WRK_DIR:"=%\%FIL_NAM:"=%.ddl"
+SET LOG_FIL="%WRK_DIR:"=%\%FIL_NAM:"=%.log"
+
+REM ---------------------------------------------------------------------------
+REM - Delete the files if they exist
+REM ---------------------------------------------------------------------------
+IF EXIST %XML_FIL% DEL %XML_FIL%
+IF EXIST %DDL_FIL% DEL %DDL_FIL%
+IF EXIST %LOG_FIL% DEL %LOG_FIL%
+
+REM ---------------------------------------------------------------------------
+REM - Export the model from 3D
+REM - Switch to 3D installation directory, generate deployment, switch back to
+REM - original directory
+REM ---------------------------------------------------------------------------
+ECHO Exporting model %MOD_NAM% version %MOD_VER% from 3D ..
+SET CUR_DIR="%CD%"
+CD %INS_DIR%
+%JAVA_EX% -Xmx512m -XX:MaxMetaspaceSize=256m -splash: -jar %JAR_FIL% redexport -r %REPO_3D% -c %CATG_3D% -m %MOD_NAM% -v %MOD_VER% -o %XML_FIL% > %LOG_FIL% 2>&1
+CD %CUR_DIR%
+
+REM ---------------------------------------------------------------------------
+REM - GIT integration !! NB: NOT TESTED !!
+REM ---------------------------------------------------------------------------
+REM IF NOT EXIST "%WRK_DIR:"=%\ProjectLock.txt" (
+REM    git -C %WRK_DIR% pull
+REM    git -C %WRK_DIR% add %WRK_DIR%
+REM    git -C %WRK_DIR% commit -a -m "Checking in deployment packages for %MOD_NAM% 'Commit %%MOD_NAM%:"=% %MOD_VER:"=%'" | Out-file "%WRK_DIR:"=%\deploylog_%%MOD_NAM%:"=%_%MOD_VER:"=%.log"
+REM    git -C %WRK_DIR% push -u origin
+REM    git -C %WRK_DIR% log -1 | Out-file "%WRK_DIR:"=%\commitlog_%%MOD_NAM%:"=%_%MOD_VER:"=%.log"
+REM )
+
+REM ---------------------------------------------------------------------------
+REM - Deploy the model to RED
+REM ---------------------------------------------------------------------------
+ECHO Deploying model %MOD_NAM% version %MOD_VER% to RED repository %RED_MET% ..
+%RED_CLI% deployment deploy --xml-file-name %XML_FIL% --meta-dsn %RED_MET% --meta-dsn-arch %RED_ARC% --red-user-name %RED_USR% --ddl-file-name %DDL_FIL% >> %LOG_FIL% 2>&1
+
+:FINISH
+ECHO Completed Successfully

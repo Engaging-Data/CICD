@@ -18,8 +18,14 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+#- task: PowerShell@2
+#  inputs:
+#    targetType: 'inline'
+#    script: '& PowerShell.exe -file "$(System.DefaultWorkingDirectory)\Deploy_3D_to_REDPowershellWorks.ps1"'
+#    runScriptInSeparateScope: true
+#    arguments: 
+
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: '& PowerShell.exe -file "$(System.DefaultWorkingDirectory)\Deploy_3D_to_REDPowershellWorks.ps1"'
+    filePath: 'Deploy_3D_to_REDPowershellWorks.ps1'
     runScriptInSeparateScope: true

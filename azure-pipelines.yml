@@ -29,3 +29,7 @@ steps:
   inputs:
     filePath: 'Deploy_3D_to_REDPowershellWorks.ps1'
     arguments: '-ExecutionPolicy bypass'
+- task: PowerShell@2
+  inputs:
+    filePath: 'Deploy_3D_to_REDPowershellWorks.ps1'
+    errorActionPreference: 'continue'

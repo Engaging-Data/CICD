@@ -1,4 +1,5 @@
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope LocalMachine
 $var = Get-ExecutionPolicy -List
 Set-Content C:\GitRepo3D\test.txt $var
 $WRK_DIR="C:\GitRepo3D\DemoTest\001"

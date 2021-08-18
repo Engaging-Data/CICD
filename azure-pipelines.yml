@@ -28,4 +28,3 @@ steps:
 - task: PowerShell@2
   inputs:
     filePath: 'Deploy_3D_to_REDPowershellWorks.ps1'
-    runScriptInSeparateScope: true

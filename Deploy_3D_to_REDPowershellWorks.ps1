@@ -1,5 +1,6 @@
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser
-Set-Content C:\GitRepo3D\test.txt $env:Processor_Architecture
+$var = Get-ExecutionPolicy -List
+Set-Content C:\GitRepo3D\test.txt $var
 $WRK_DIR="C:\GitRepo3D\DemoTest\001"
 $INS_DIR="C:\Program Files\WhereScape\WhereScape 3D"
 $EXE_DIR="C:\Program Files\WhereScape\RED"

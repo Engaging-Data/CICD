@@ -1,0 +1,26 @@
+04/08/2022 09:38:28 AM - git.util - DEBUG - Failed checking if running in CYGWIN due to: FileNotFoundError(2, 'The system cannot find the file specified', None, 2, None)
+04/08/2022 09:38:28 AM - __main__ - ERROR - (<class 'git.exc.InvalidGitRepositoryError'>, InvalidGitRepositoryError(), <traceback object at 0x0000024BCBDD0A40>)
+Traceback (most recent call last):
+  File "C:\Users\Marwan Riach\Engaging Data Limited\All Staff - Projects - Projects\CICDDemo\Scripts\3DtoGIT.py", line 423, in _reset_git_repo
+    repo = git.Repo(git_repo)
+  File "C:\Users\Public\Anaconda3\lib\site-packages\git\repo\base.py", line 224, in __init__
+    self.working_dir: Optional[PathLike] = self._working_tree_dir or self.common_dir
+  File "C:\Users\Public\Anaconda3\lib\site-packages\git\repo\base.py", line 307, in common_dir
+    raise InvalidGitRepositoryError()
+git.exc.InvalidGitRepositoryError
+04/08/2022 09:38:28 AM - __main__ - ERROR - Function Error: (<class 'AttributeError'>, AttributeError("'NoneType' object has no attribute 'git'"), <traceback object at 0x0000024BCA867F40>)
+Traceback (most recent call last):
+  File "C:\Users\Marwan Riach\Engaging Data Limited\All Staff - Projects - Projects\CICDDemo\Scripts\3DtoGIT.py", line 335, in push_to_repo_branch
+    pullfromremote = repo.git.pull(githubrepo,branch)
+AttributeError: 'NoneType' object has no attribute 'git'
+04/08/2022 09:39:07 AM - __main__ - ERROR - (<class 'git.exc.InvalidGitRepositoryError'>, InvalidGitRepositoryError(), <traceback object at 0x0000024BCBC1ED80>)
+Traceback (most recent call last):
+  File "C:\Users\Marwan Riach\Engaging Data Limited\All Staff - Projects - Projects\CICDDemo\Scripts\3DtoGIT.py", line 423, in _reset_git_repo
+    repo = git.Repo(git_repo)
+  File "C:\Users\Public\Anaconda3\lib\site-packages\git\repo\base.py", line 224, in __init__
+    self.working_dir: Optional[PathLike] = self._working_tree_dir or self.common_dir
+  File "C:\Users\Public\Anaconda3\lib\site-packages\git\repo\base.py", line 307, in common_dir
+    raise InvalidGitRepositoryError()
+git.exc.InvalidGitRepositoryError
+04/08/2022 10:00:12 AM - git.cmd - DEBUG - Popen(['git', 'branch'], cwd=C:\Users\Marwan Riach\Documents\GitHub\engaging-data\CICDDemo, universal_newlines=False, shell=None, istream=None)
+04/08/2022 10:27:08 AM - git.cmd - DEBUG - Popen(['git', 'branch'], cwd=C:\Users\Marwan Riach\Documents\GitHub\engaging-data\CICDDemo, universal_newlines=False, shell=None, istream=None)

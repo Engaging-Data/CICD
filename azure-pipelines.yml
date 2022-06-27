@@ -78,14 +78,14 @@ trigger:
 
 pool: Default
 
-#steps:
-#- task: UsePythonVersion@0
-#  inputs:
-#    versionSpec: '3.9' 
-#    addToPath: true 
-#  displayName: 'Use Python 3.9'
-#- task: PythonScript@0
-#  inputs:
-#    scriptSource: 'filePath'
-#    scriptPath: 'git_to_red.py'
-#    arguments: '--github_organization ${{ parameters.pipeline_github_organization }} --github_repo ${{ parameters.pipeline_github_repo }} --github_build ${{ parameters.pipeline_github_build }} --github_commit_branch ${{ parameters.pipeline_github_commit_branch }} --metadata_db ${{ parameters.pipeline_target_repository_db }} --metadata_dsn ${{ parameters.pipeline_target_repository_dsn }} --metadata_user ${{ parameters.pipeline_target_repository_user }} --metatdate_pwd ${{ parameters.pipeline_target_repository_pswd }} --model_name ${{ parameters.pipeline_model_name }}  --model_version ${{ parameters.pipeline_model_version }} --target_database_type ${{ parameters.pipeline_target_connection_database_type }}  --target_database_id ${{ parameters.pipeline_database_id }}  --target_snowflake_account ${{ parameters.pipeline_target_connection_snowflake_account }}  --target_snowflake_warehouse ${{ parameters.pipeline_target_connection_snowflake_warehouse }}  --target_connection_type ${{ parameters.pipeline_target_connection_type }}  --target_connection_name ${{ parameters.pipeline_target_connection_name }}  --target_connection_dsn ${{ parameters.pipeline_target_connection_dsn }}'
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.9' 
+    addToPath: true 
+  displayName: 'Use Python 3.9'
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'filePath'
+    scriptPath: 'git_to_red_2.py'
+    arguments: '--github_organization ${{ parameters.pipeline_github_organization }} --github_repo ${{ parameters.pipeline_github_repo }} --github_build ${{ parameters.pipeline_github_build }} --github_commit_branch ${{ parameters.pipeline_github_commit_branch }} --metadata_db ${{ parameters.pipeline_target_repository_db }} --metadata_dsn ${{ parameters.pipeline_target_repository_dsn }} --metadata_user ${{ parameters.pipeline_target_repository_user }} --metatdate_pwd ${{ parameters.pipeline_target_repository_pswd }} --model_name ${{ parameters.pipeline_model_name }}  --model_version ${{ parameters.pipeline_model_version }} --target_database_type ${{ parameters.pipeline_target_connection_database_type }}  --target_database_id ${{ parameters.pipeline_database_id }}  --target_snowflake_account ${{ parameters.pipeline_target_connection_snowflake_account }}  --target_snowflake_warehouse ${{ parameters.pipeline_target_connection_snowflake_warehouse }}  --target_connection_type ${{ parameters.pipeline_target_connection_type }}  --target_connection_name ${{ parameters.pipeline_target_connection_name }}  --target_connection_dsn ${{ parameters.pipeline_target_connection_dsn }}'

@@ -3,29 +3,89 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+parameters:
+- name: pipeline_model_name 
+  type: string
+  default: 'Traders'
+
+- name: pipeline_model_version
+  type: string
+  default: '20220405_Small'
+
+- name: pipeline_github_organization
+  type: string
+  default: 'Engaging-Data'
+
+- name: pipeline_github_repo
+  type: string
+  default: 'CICDDemo'
+  
+- name: pipeline_github_build
+  type: string
+  default: '3D-Design'
+
+- name: pipeline_github_commit_branch
+  type: string
+  default: 'main'
+
+- name: pipeline_target_repository_dsn
+  type: string
+  default: 'SnowflakeCICD_Repo'
+
+- name: pipeline_target_repository_db
+  type: string
+  default: 'SnowflakCICD_Repo'
+
+- name: pipeline_target_repository_user
+  type: string
+  default: 'EngagingDataAdmin'
+
+- name: pipeline_target_repository_pswd
+  type: string
+  default: 'DataLakes2021'
+
+- name: pipeline_target_connection_name
+  type: string
+  default: 'Target'
+
+- name: pipeline_target_connection_dsn
+  type: string
+  default: 'SnowflakeCICD_Target'
+
+- name: pipeline_target_connection_type
+  type: string
+  default: 'ODBC'
+
+- name: pipeline_target_connection_database_type
+  type: string
+  default: 'Custom'
+
+- name: pipeline_target_connection_snowflake_account
+  type: string
+  default: 'ugisjvx-ll40459.snowflakecomputing.com'
+
+- name: pipeline_target_connection_snowflake_warehouse
+  type: string
+  default: 'COMPUTE_WH'
+
+- name: pipeline_database_id
+  type: string
+  default: 'DATAWAREHOUSE'
+
+
 trigger:
 - main
 
 pool: Default
-#  vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, worlds!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
-#- task: PowerShell@2
+#steps:
+#- task: UsePythonVersion@0
 #  inputs:
-#    targetType: 'inline'
-#    script: '& PowerShell.exe -file "$(System.DefaultWorkingDirectory)\Deploy_3D_to_REDPowershellWorks.ps1"'
-#    runScriptInSeparateScope: true
-#    arguments: 
-
-- task: PowerShell@2
-  inputs:
-    filePath: 'Deploy_3D_to_REDPowershellWorks.ps1'
-    errorActionPreference: 'continue'
+#    versionSpec: '3.9' 
+#    addToPath: true 
+#  displayName: 'Use Python 3.9'
+#- task: PythonScript@0
+#  inputs:
+#    scriptSource: 'filePath'
+#    scriptPath: 'git_to_red.py'
+#    arguments: '--github_organization ${{ parameters.pipeline_github_organization }} --github_repo ${{ parameters.pipeline_github_repo }} --github_build ${{ parameters.pipeline_github_build }} --github_commit_branch ${{ parameters.pipeline_github_commit_branch }} --metadata_db ${{ parameters.pipeline_target_repository_db }} --metadata_dsn ${{ parameters.pipeline_target_repository_dsn }} --metadata_user ${{ parameters.pipeline_target_repository_user }} --metatdate_pwd ${{ parameters.pipeline_target_repository_pswd }} --model_name ${{ parameters.pipeline_model_name }}  --model_version ${{ parameters.pipeline_model_version }} --target_database_type ${{ parameters.pipeline_target_connection_database_type }}  --target_database_id ${{ parameters.pipeline_database_id }}  --target_snowflake_account ${{ parameters.pipeline_target_connection_snowflake_account }}  --target_snowflake_warehouse ${{ parameters.pipeline_target_connection_snowflake_warehouse }}  --target_connection_type ${{ parameters.pipeline_target_connection_type }}  --target_connection_name ${{ parameters.pipeline_target_connection_name }}  --target_connection_dsn ${{ parameters.pipeline_target_connection_dsn }}'

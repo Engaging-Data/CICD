@@ -82,6 +82,7 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.9' 
+    architecture: 'x64'
     addToPath: true 
   displayName: 'Use Python 3.9'
 - task: PythonScript@0
